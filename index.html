@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ragab Badr - Portfolio</title>
+    <!-- الرابط الصحيح والمعدل لمكتبة الـ PDF لضمان عمل الزر بنجاح -->
+    <script src="https://cloudflare.com"></script>
+    <style>
+        :root {
+            --primary: #1e293b;
+            --secondary: #0f172a;
+            --accent: #2563eb;
+            --text: #334155;
+            --bg: #f8fafc;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            margin: 0;
+            padding: 0;
+        }
+        .control-bar {
+            background: #ffffff;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .btn-pdf {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn-pdf:hover {
+            background-color: #dc2626;
+        }
+        #cv-content {
+            background-color: var(--bg);
+            padding-bottom: 2rem;
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        header h1 { margin: 0; font-size: 2.5rem; }
+        header p { margin: 0.5rem 0 0; font-size: 1.2rem; opacity: 0.9; }
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 1rem;
+        }
+        .contact-info { margin-top: 1.5rem; font-size: 0.9rem; }
+        .contact-info span { margin: 0 10px; display: inline-block; }
+        .container { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+        section { background: white; padding: 2rem; margin-bottom: 2rem; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        h2 { border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; color: var(--primary); margin-top: 0; }
+        .job, .edu { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px dashed #e2e8f0; }
+        .job:last-child, .edu:last-child { border: none; margin-bottom: 0; padding-bottom: 0; }
+        .job-header, .edu-header { display: flex; justify-content: space-between; flex-wrap: wrap; font-weight: bold; color: var(--secondary); }
+        .company, .institution { color: var(--accent); }
+        .date { color: #64748b; font-size: 0.9rem; }
+        ul { padding-left: 1.2rem; margin-top: 0.5rem; }
+        li { margin-bottom: 0.4rem; }
+        .badge { background: #e2e8f0; padding: 0.3rem 0.6rem; border-radius: 4px; display: inline-block; margin: 0.2rem; font-size: 0.85rem; font-weight: 500; }
+        
+        .pdf-mode header { background: #1e293b !important; color: white !important; }
+        .pdf-mode section { box-shadow: none !important; border: 1px solid #e2e8f0; }
+    </style>
+</head>
+<body>
+
+<div class="control-bar">
+    <button class="btn-pdf" onclick="downloadPDF()">📄 Export to PDF</button>
+</div>
+
+<div id="cv-content">
+    <header>
+        <div id="profile-image-container"></div>
+        <h1 id="name"></h1>
+        <p id="title"></p>
+        <div class="contact-info" id="contact"></div>
+    </header>
+
+    <div class="container">
+        <section>
+            <h2>Professional Summary</h2>
+            <p id="summary"></p>
+        </section>
+
+        <section>
+            <h2>Experience</h2>
+            <div id="experience-list"></div>
+        </section>
+
+        <section>
+            <h2>Education</h2>
+            <div id="education-list"></div>
+        </section>
+
+        <section>
+            <h2>Skills & Tools</h2>
+            <div id="skills-list"></div>
+        </section>
+
+        <section>
+            <h2>Certificates & Courses</h2>
+            <div id="courses-list"></div>
+        </section>
+    </div>
+</div>
+
+<script>
+const resumeData = {
+  "personal_information": {
+    "name": "Ragab Badr",
+    "title": "Senior Accountant",
+    "email": "reckybadr2010@gmail.com",
+    "phone": "+966 544918987",
+    "location": "Riyadh, SA",
+    "age": 38,
+    "image": "my-photo.jpg" 
+  },
+  "professional_summary": "Experienced Senior Accountant with More than 12 years of experience in managing and overseeing the day-to-day accounting operations of large organizations. Skilled in financial analysis, budgeting, forecasting, and process improvement. Adept at utilizing modern accounting software to streamline processes and ensure accuracy of financial data.",
+  "education": [
+    {
+      "degree": "Bachelor at Faculty of Commerce",
+      "institution": "Tanta-Egypt",
+      "start_date": "May 2005",
+      "end_date": "August 2009",
+      "grade": "70"
+    }
+  ],
+  "experience": [
+    {
+      "role": "Senior Accountant",
+      "company": "Dental kingdom L.C.C",
+      "location": "Riyadh, Saudi Arabia",
+      "start_date": "January 2025",
+      "end_date": "Present",
+      "highlights": [
+        "Lead and oversee all accounting operations.",
+        "Prepare of monthly and annually financial reports.",
+        "Prepare VAT, Withholding and Tax report.",
+        "Coordinate the external auditor's office and prepare audit requirements.",
+        "Tax audit, Inspection and Refund skills with ZAKTA.",
+        "Ensure compliance with Saudi regulations & IFRS standards."
+      ]
+    },
+    {
+      "role": "Senior Accountant",
+      "company": "Prime Links for Communications IT Est",
+      "location": "Khobar, Saudi Arabia",
+      "start_date": "January 2024",
+      "end_date": "January 2025",
+      "highlights": [
+        "Manage and lead all accounting transactions.",
+        "Follow up the receipt of the company's dues with customers and ensure that they are collected on time.",
+        "Bank reconciliations, payments, fund follow-up.",
+        "Ensure compliance with approved accounting and legal regulations.",
+        "Preparation and analysis of financial reports, budgets.",
+        "Prepare and upload VAT statements."
+      ]
+    },
+    {
+      "role": "Cost Accountant",
+      "company": "Taghdia Advanced Limited CO For Catering TADCO",
+      "location": "Makah, Saudi Arabia",
+      "start_date": "November 2023",
+      "end_date": "January 2024",
+      "highlights": [
+        "Analysis and pricing of Hajj and Umrah mission contracts.",
+        "Determine estimated cost of meals and contracts.",
+        "Setup a cost flow control system to reduce cost.",
+        "Preparation of monthly cost reports."
+      ]
+    },
+    {
+      "role": "Chief Accountant",
+      "company": "Fresh Foundation for Food Stuff",
+      "location": "Tanta, Egypt",
+      "start_date": "August 2019",
+      "end_date": "October 2023",
+      "highlights": [
+        "Supervise day-to-day accounting processes, including daily entries, credits/debits and general ledger.",
+        "Prepare and audit financial statements, reports and key performance indicators on a monthly, quarterly and annual basis.",
+        "Supervision of the management of working capital, including debits, credits, cash and facilities.",
+        "Prepare Monthly and annual Tax reports."
+      ]
+    },
+    {
+      "role": "Accountant Supervisor",
+      "company": "Almoghra land for agricultural investment",
+      "location": "Tanta, Egypt",
+      "start_date": "January 2020",
+      "end_date": "October 2023",
+      "highlights": [
+        "Management and supervision of all accounting transactions.",
+        "Determine the cost centers.",
+        "Preparation and establishment of the company's asset records and classification of CAPEX and OPEX.",
+        "Preparation of annual operating budgets to identify sources of funding and control.",
+        "Prepare Financial Statements - Financial Position, Income, Cash Flows and Changes in Shareholders' Rights for Owners and Others."
+      ]
+    },
+    {
+      "role": "Internal Auditor",
+      "company": "ELShamdan Industrial foods",
+      "location": "Alex, Egypt",
+      "start_date": "November 2012",
+      "end_date": "June 2019",
+      "highlights": [
+        "Internal Auditor for Delta Retail Sales Sector.",
+        "Planning the audit process within the sector to achieve control over (inventory-assets-cash).",
+        "Ensure company's policies and procedures are committed."
+      ]
+    },
+    {
+      "role": "Cost Accountant",
+      "company": "Al-Dahary Group and Branches",
+      "location": "Riyadh, Saudi Arabia",
+      "start_date": "June 2011",
+      "end_date": "August 2012",
+      "highlights": [
+        "Preparation of the cost report sites in accordance with the contract and clarification of deviations for the operating manage.",
+        "Audit and reconciliation of site operating petty cash.",
+        "Determine the cost meals according to Rispi and contract."
+      ]
+    },
+    {
+      "role": "Accountant",
+      "company": "Dream centre for trading and supplies",
+      "location": "Sharm Elshikh, Egypt",
+      "start_date": "August 2009",
+      "end_date": "February 2011",
+      "highlights": [
+        "Review price offers with customer bills.",
+        "Follow-up on collections and credit periods."
+      ]
+    }
+  ],
+  "internships_and_courses": [
+    "Course odoo16 - Udemy",
+    "Oracle end user course",
+    "Courses in -smacc -Onyx pro-- Peachtree- QuickBooks",
+    "IFRS Certificate (Studying for Jun 2026 Exam)"
+  ],
