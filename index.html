@@ -195,6 +195,84 @@
                     <li>Internal Auditor for Delta Retail Sales Sector.</li>
                     <li>Planning the audit process within the sector to achieve control over (inventory-assets-cash).</li>
                     <li>Ensure company policies and procedures are committed.</li>
+                                    </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>Cost Accountant <span class="company">@ Al-Dahary Group and Branches</span></div>
+                    <div class="date">June 2011 - August 2012</div>
+                </div>
+                <div class="date" style="margin-bottom:0.5rem;">Riyadh, Saudi Arabia</div>
+                <ul>
+                    <li>Preparation of the cost report sites in accordance with the contract and clarification of deviations for the operating manage.</li>
+                    <li>Audit and reconciliation of site operating petty cash.</li>
+                    <li>determine the cost meals according to Rispi and contract.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>Accountant <span class="company">@ Dream centre for trading and supplies</span></div>
+                    <div class="date">August 2009 - February 2011</div>
+                </div>
+                <div class="date" style="margin-bottom:0.5rem;">Sharm Elshikh, Egypt</div>
+                <ul>
+                    <li>Review price offers with customer bills.</li>
+                    <li>Follow-up on collections and credit periods.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Education</h2>
+            <div class="edu">
+                <div class="edu-header">
+                    <div>Bachelor at Faculty of Commerce - <span class="institution">Tanta-Egypt</span></div>
+                    <div class="date">May 2005 - August 2009</div>
+                </div>
+                <div>Grade: 70</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Skills & Tools</h2>
+            <span class="badge">ERP-CRM systems</span>
+            <span class="badge">Advanced Excel (Data analysis)</span>
+            <span class="badge">Power BI</span>
+        </section>
+
+        <section>
+            <h2>Certificates & Courses</h2>
+            <ul>
+                <li>Course odoo16 - Udemy</li>
+                <li>Oracle end user course</li>
+                <li>Courses in -smacc -Onyx pro-- Peachtree- QuickBooks</li>
+                <li>IFRS Certificate (Studying for Jun 2026 Exam)</li>
+            </ul>
+        </section>
+    </div>
+</div>
+
+<script>
+function downloadPDF() {
+    var element = document.getElementById('cv-content');
+    element.classList.add('pdf-mode');
+    var options = {
+        margin:       0.4,
+        filename:     'Ragab_Badr_Resume.pdf',
+        image:        { type: 'jpeg', quality: 0.99 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    html2pdf().set(options).from(element).save().then(function() {
+        element.classList.remove('pdf-mode');
+    });
+}
+</script>
+</body>
+</html>
+
                 </ul>
             </div>
 
